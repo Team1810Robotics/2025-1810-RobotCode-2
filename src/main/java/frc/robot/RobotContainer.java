@@ -107,11 +107,20 @@ public class RobotContainer {
         return Commands.print("No autonomous command configured");
     }
 
+    /**
+     * Applies a deadzone to the input value. Values within the range of -0.1 to 0.1 are
+     * set to zero to prevent small unintentional movements. Values outside this range
+     * are squared to maintain the direction while providing finer control at lower speeds.
+     *
+     * @param input the input value to be adjusted
+     * @return the adjusted value after applying the deadzone and squaring
+     */
     public double deadzone(double input) {
+        //TODO: Work with drivers to find deadzone
         if (Math.abs(input) <= .1 && Math.abs(input) > 0) {
             return 0;
         }
 
-        return input;
+        return input * input; //TODO: Find out if this is necessary
     }
 }
