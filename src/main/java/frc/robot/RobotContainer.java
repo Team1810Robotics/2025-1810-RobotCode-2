@@ -18,8 +18,17 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
+import frc.robot.subsystems.IntakeSubsystem;
 
 public class RobotContainer {
+
+    private final CommandXboxController xbox = new CommandXboxController(0);
+    private final CommandJoystick joystick = new CommandJoystick(1);
+
+    public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
+    private final IntakeSubsystem intakeSubsysem = new IntakeSubsystem();
+
+
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(1).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
 
@@ -32,16 +41,11 @@ public class RobotContainer {
 
     private final Telemetry logger = new Telemetry(MaxSpeed);
 
-    private final CommandXboxController xbox = new CommandXboxController(0);
-
-    private final CommandJoystick joystick = new CommandJoystick(1);
-
-    public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
-
     public RobotContainer() {
         configureXbox();
     }
 
+    @SuppressWarnings("unused")
     private void configureXbox() {
         // Note that X is defined as forward according to WPILib convention,
         // and Y is defined as to the left according to WPILib convention.
@@ -72,6 +76,7 @@ public class RobotContainer {
         drivetrain.registerTelemetry(logger::telemeterize);
     }
 
+    @SuppressWarnings("unused")
     private void configureJoystick() {
         // Note that X is defined as forward according to WPILib convention,
         // and Y is defined as to the left according to WPILib convention.
