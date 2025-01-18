@@ -1,8 +1,8 @@
 [![.github/workflows/main.yml](https://github.com/Team1810Robotics/2024-robot-code/actions/workflows/main.yml/badge.svg)](https://github.com/Team1810Robotics/2024-robot-code/actions/workflows/main.yml)
 
-# 20-- CATATRONICS/CUBATRONICS Robot Code
+# 2025 CATATRONICS Robot Code
 
-## Team 1810/9316 - CATATRONICS/CUBATRONICS - code for the 20-- competition season
+## Team 1810 - CATATRONICS - code for the 2025 competition season
 
 ### Bot Named [TBD]
 
