@@ -42,6 +42,7 @@ public class RobotContainer {
         configureXbox();
     }
 
+    @SuppressWarnings("unused")
     private void configureXbox() {
         // Note that X is defined as forward according to WPILib convention,
         // and Y is defined as to the left according to WPILib convention.
@@ -55,16 +56,16 @@ public class RobotContainer {
         );
 
         xbox.b().whileTrue(drivetrain.applyRequest(() -> brake));
-        // joystick.b().whileTrue(drivetrain.applyRequest(() ->
-        //     point.withModuleDirection(new Rotation2d(-joystick.getY(), -joystick.getX()))
-        // ));
+        xbox.b().whileTrue(drivetrain.applyRequest(() ->
+            point.withModuleDirection(new Rotation2d(-xbox.getLeftY(), -xbox.getLeftX()))
+        ));
 
-        // Run SysId routines when holding back/start and X/Y.
-        // // Note that each routine should be run exactly once in a single log.
-        // joystick.back().and(joystick.y()).whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
-        // joystick.back().and(joystick.x()).whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));
-        // joystick.start().and(joystick.y()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
-        // joystick.start().and(joystick.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
+        //Run SysId routines when holding back/start and X/Y.
+        // Note that each routine should be run exactly once in a single log.
+        xbox.back().and(xbox.y()).whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
+        xbox.back().and(xbox.x()).whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));
+        xbox.start().and(xbox.y()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
+        xbox.start().and(xbox.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
         // reset the field-centric heading on left bumper press
         xbox.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
@@ -72,6 +73,7 @@ public class RobotContainer {
         drivetrain.registerTelemetry(logger::telemeterize);
     }
 
+    @SuppressWarnings("unused")
     private void configureJoystick() {
         // Note that X is defined as forward according to WPILib convention,
         // and Y is defined as to the left according to WPILib convention.
@@ -85,16 +87,16 @@ public class RobotContainer {
         );
 
         joystick.button(1).whileTrue(drivetrain.applyRequest(() -> brake));
-        // joystick.b().whileTrue(drivetrain.applyRequest(() ->
-        //     point.withModuleDirection(new Rotation2d(-joystick.getY(), -joystick.getX()))
-        // ));
+        joystick.button(11).whileTrue(drivetrain.applyRequest(() ->
+            point.withModuleDirection(new Rotation2d(-joystick.getY(), -joystick.getX()))
+        ));
 
         // Run SysId routines when holding back/start and X/Y.
-        // // Note that each routine should be run exactly once in a single log.
-        // joystick.back().and(joystick.y()).whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
-        // joystick.back().and(joystick.x()).whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));
-        // joystick.start().and(joystick.y()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
-        // joystick.start().and(joystick.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
+        // Note that each routine should be run exactly once in a single log.
+        joystick.button(10).and(joystick.button(3)).whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
+        joystick.button(10).and(joystick.button(3)).whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));
+        joystick.button(9).and(joystick.button(4)).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
+        joystick.button(9).and(joystick.button(4)).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
         // reset the field-centric heading on left bumper press
         joystick.button(12).onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
