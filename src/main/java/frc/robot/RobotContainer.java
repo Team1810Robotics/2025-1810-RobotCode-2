@@ -10,12 +10,13 @@ import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
-
+import frc.robot.commands.Intake;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -41,9 +42,11 @@ public class RobotContainer {
 
     private final Telemetry logger = new Telemetry(MaxSpeed);
 
+
     public RobotContainer() {
         configureXbox();
     }
+
 
     @SuppressWarnings("unused")
     private void configureXbox() {
@@ -72,6 +75,9 @@ public class RobotContainer {
 
         // reset the field-centric heading on left bumper press
         xbox.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
+
+        xbox.x().whileTrue(new Intake(intakeSubsysem, true));
+        xbox.y().whileTrue(new Intake(intakeSubsysem, false));
 
         drivetrain.registerTelemetry(logger::telemeterize);
     }
